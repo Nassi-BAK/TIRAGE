@@ -28,14 +28,14 @@ class ConfirmablePasswordController extends Controller
     {
         if (! Auth::guard('web')->validate([
             'email' => $request->user()->email,
-            'password' => $request->password,
+            'numero_adhesion' => $request->numero_adhesion,
         ])) {
             throw ValidationException::withMessages([
-                'password' => __('auth.password'),
+                'numero_adhesion' => __('auth.numero_adhesion'),
             ]);
         }
 
-        $request->session()->put('auth.password_confirmed_at', time());
+        $request->session()->put('auth.numero_adhesion', time());
 
         return redirect()->intended(RouteServiceProvider::HOME);
     }

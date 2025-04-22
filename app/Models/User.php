@@ -27,7 +27,6 @@ public function destinations()
      */
     protected $fillable = [
         'email',
-        'password',
         'nom_complet',
         'numero_adhesion',
         'lieu_travail',
@@ -40,10 +39,7 @@ public function destinations()
      *
      * @var array<int, string>
      */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
+   
 
     /**
      * The attributes that should be cast.
@@ -52,6 +48,6 @@ public function destinations()
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'password' => 'hashed',
+        'numero_adhesion' => 'hashed',
     ];
 }

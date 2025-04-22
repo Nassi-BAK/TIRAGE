@@ -71,10 +71,11 @@ Route::delete('/destinations/{id}', [DestinationController::class, 'destroy'])->
     Route::post('/store-chiox', [ChioxController::class, 'store']);
 
 
-    Route::get('/error', function () {
-        return Inertia::render('ErrorPage', [
-            'error' => session('error'),
-        ]);
-    });
+   
     
 Route::get('/chiox', [ChioxController::class, 'index'])->name('chiox.index');
+Route::get('/tirage', [ChioxController::class, 'tirage'])->name('tirage');
+
+Route::get('/chiox-stats', [ChioxController::class, 'getChioxStats']);
+
+Route::get('/destinations', [DestinationController::class, 'index1']);

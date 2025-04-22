@@ -33,7 +33,6 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'email' => 'required|string|lowercase|email|max:255|unique:' . User::class,
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'nom_complet' => 'required|string|max:255',
             'numero_adhesion' => 'required|string|max:100',
             'lieu_travail' => 'required|string|max:255',
@@ -43,7 +42,6 @@ class RegisteredUserController extends Controller
     
         $user = User::create([
             'email' => $request->email,
-            'password' => Hash::make($request->password),
             'nom_complet' => $request->nom_complet,
             'numero_identification' => $request->numero_identification,
             'numero_adhesion' => $request->numero_adhesion,

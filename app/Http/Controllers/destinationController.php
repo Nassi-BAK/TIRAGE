@@ -99,5 +99,14 @@ public function destroy($id)
 
     return redirect()->route('destinations.index')->with('success', 'Destination supprimée avec succès');
 }
-    
+
+public function index1()
+{
+    // Récupère le total des destinations
+    $totalDestinations = Destination::count();
+
+    return Inertia::render('Dashboard', [
+        'totalDestinations' => $totalDestinations,
+    ]);
+}
 }

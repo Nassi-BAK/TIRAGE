@@ -9,13 +9,13 @@ import { Head, Link, useForm } from '@inertiajs/react';
 export default function Login({ status, canResetPassword }) {
     const { data, setData, post, processing, errors, reset } = useForm({
         email: '',
-        password: '',
+        numero_adhesion: '',
         remember: false,
     });
 
     useEffect(() => {
         return () => {
-            reset('password');
+            reset('numero_adhesion');
         };
     }, []);
 
@@ -69,17 +69,17 @@ export default function Login({ status, canResetPassword }) {
                         </div>
 
                         <div>
-                            <InputLabel htmlFor="password" value="Mot de passe" className="text-blue-800 font-medium" />
+                            <InputLabel htmlFor="numero_adhesion" value="numero adhesion" className="text-blue-800 font-medium" />
                             <TextInput
-                                id="password"
-                                type="password"
-                                name="password"
-                                value={data.password}
+                                id="numero_adhesion"
+                                type="numero_adhesion"
+                                name="numero_adhesion"
+                                value={data.numero_adhesion}
                                 className="mt-1 block w-full border-blue-300 focus:border-blue-500 focus:ring focus:ring-blue-200"
                                 autoComplete="current-password"
-                                onChange={(e) => setData('password', e.target.value)}
+                                onChange={(e) => setData('numero_adhesion', e.target.value)}
                             />
-                            <InputError message={errors.password} className="mt-1 text-sm" />
+                            <InputError message={errors.numero_adhesion} className="mt-1 text-sm" />
                         </div>
 
                         <div className="flex items-center justify-between">

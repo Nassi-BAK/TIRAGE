@@ -20,11 +20,7 @@ export default function Register() {
         vacances_l_annee_dernier: '',
     });
 
-    useEffect(() => {
-        return () => {
-            reset('password', 'password_confirmation');
-        };
-    }, []);
+    
 
     const submit = (e) => {
         e.preventDefault();
@@ -85,39 +81,7 @@ export default function Register() {
                             </div>
                         </div>
 
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            {/* Password */}
-                            <div>
-                                <InputLabel htmlFor="password" value="Mot de passe" className="text-blue-800 font-medium" />
-                                <TextInput
-                                    id="password"
-                                    type="password"
-                                    name="password"
-                                    value={data.password}
-                                    className="mt-1 block w-full border-blue-300 focus:border-blue-500 focus:ring focus:ring-blue-200"
-                                    autoComplete="new-password"
-                                    onChange={(e) => setData('password', e.target.value)}
-                                    required
-                                />
-                                <InputError message={errors.password} className="mt-1 text-sm" />
-                            </div>
-                            
-                            {/* Confirm Password */}
-                            <div>
-                                <InputLabel htmlFor="password_confirmation" value="Confirmer le mot de passe" className="text-blue-800 font-medium" />
-                                <TextInput
-                                    id="password_confirmation"
-                                    type="password"
-                                    name="password_confirmation"
-                                    value={data.password_confirmation}
-                                    className="mt-1 block w-full border-blue-300 focus:border-blue-500 focus:ring focus:ring-blue-200"
-                                    autoComplete="new-password"
-                                    onChange={(e) => setData('password_confirmation', e.target.value)}
-                                    required
-                                />
-                                <InputError message={errors.password_confirmation} className="mt-1 text-sm" />
-                            </div>
-                        </div>
+                        
 
                         <div className="border-t border-blue-100 my-6 pt-4">
                             <h3 className="text-lg font-medium text-blue-800 mb-3">Informations complémentaires</h3>
