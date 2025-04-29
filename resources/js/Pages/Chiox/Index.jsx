@@ -32,7 +32,7 @@ export default function Index({ chiox: initialChiox }) {
       return () => clearTimeout(timer);
     }
   }, [showConfetti]);
-
+  
   const handleTirage = () => {
     if (filteredChiox.length === 0) {
       alert("Aucun choix disponible pour le tirage avec les filtres actuels.");
@@ -75,6 +75,7 @@ export default function Index({ chiox: initialChiox }) {
   const selectedItemStyle = "bg-indigo-100 border-indigo-300";
 
   return (
+
     <div className="p-6 space-y-8 max-w-7xl mx-auto">
       {showConfetti && (
         <div className="fixed inset-0 pointer-events-none z-50 flex">

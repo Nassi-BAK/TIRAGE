@@ -70,6 +70,8 @@ Route::delete('/destinations/{id}', [DestinationController::class, 'destroy'])->
 
     Route::post('/store-chiox', [ChioxController::class, 'store']);
 
+    
+
 
    
     
@@ -79,3 +81,6 @@ Route::get('/tirage', [ChioxController::class, 'tirage'])->name('tirage');
 Route::get('/chiox-stats', [ChioxController::class, 'getChioxStats']);
 
 Route::get('/destinations', [DestinationController::class, 'index1']);
+// In your routes/web.php file:
+Route::get('/download-pdf', [ChioxController::class, 'downloadApplicationPdf'])->name('download.pdf');
+

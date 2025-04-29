@@ -16,6 +16,7 @@ class AddColumnsToUsersTable extends Migration
             $table->string('numero_telephone')->nullable();
             $table->enum('vacances_l_annee_dernier', ['oui', 'non'])->nullable();
             $table->string('role')->default('user');
+            $table->string('cin')->nullable()->after('numero_adhesion')->unique();
         });
     }
 

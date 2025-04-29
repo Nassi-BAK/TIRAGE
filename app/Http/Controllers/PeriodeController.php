@@ -23,6 +23,8 @@ public function store(Request $request)
     Periode::create([
         'nom' => $request->nom,
         'type' => $request->type,
+        'date_debut' => $request->date_debut,
+        'date_fin' => $request->date_fin,
     ]);
 
     return redirect()->route('periodes.create')->with('success', 'Période ajoutée avec succès !');

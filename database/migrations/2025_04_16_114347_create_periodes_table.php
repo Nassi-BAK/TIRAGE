@@ -15,6 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('nom')->nullable(); // optionnel, pour nommer la période (ex: Été 2025)
             $table->enum('type', ['FOS-HALEUTIS', 'externe']);
+            $table->date('date_debut')->nullable();
+$table->date('date_fin')->nullable();
+
             $table->timestamps();
         });
     }

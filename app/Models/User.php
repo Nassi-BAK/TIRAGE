@@ -29,6 +29,7 @@ public function destinations()
         'email',
         'nom_complet',
         'numero_adhesion',
+        'cin',
         'lieu_travail',
         'numero_telephone',
         'vacances_l_annee_dernier',

@@ -1,26 +1,22 @@
-import { useEffect } from 'react';
+import { Head, Link, useForm } from '@inertiajs/react';
 import GuestLayout from '@/Layouts/GuestLayout';
 import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
-import { Head, Link, useForm } from '@inertiajs/react';
 
 export default function Register() {
-    const { data, setData, post, processing, errors, reset } = useForm({
+    const { data, setData, post, processing, errors } = useForm({
         name: '',
         email: '',
-        password: '',
-        password_confirmation: '',
         nom_complet: '',
-        numero_identification: '',
         numero_adhesion: '',
+        cin: '',
         lieu_travail: '',
         numero_telephone: '',
         vacances_l_annee_dernier: '',
+         // Added CIN field
     });
-
-    
 
     const submit = (e) => {
         e.preventDefault();
@@ -32,10 +28,10 @@ export default function Register() {
             <Head title="Register" />
             
             <div className="bg-white shadow-xl rounded-lg overflow-hidden w-full max-w-4xl flex flex-col md:flex-row">
-                {/* Image section - left half on desktop, top half on mobile */}
+                {/* Image section */}
                 <div className="w-full md:w-1/2 bg-blue-800 relative h-64 md:h-auto">
                     <img 
-                        src="/images/pic2.jpeg" 
+                        src="/images/pic6.png" 
                         alt="Marine theme" 
                         className="w-full h-full object-cover opacity-80"
                     />
@@ -45,7 +41,7 @@ export default function Register() {
                     </div>
                 </div>
                 
-                {/* Form section - right half on desktop, bottom half on mobile */}
+                {/* Form section */}
                 <div className="w-full md:w-1/2 p-8">
                     <h2 className="text-2xl font-semibold text-blue-900 mb-6 border-b border-blue-200 pb-2">Inscription</h2>
                     
@@ -53,7 +49,7 @@ export default function Register() {
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             {/* Email */}
                             <div>
-                                <InputLabel htmlFor="email" value="Email" className="text-blue-800 font-medium" />
+                                <InputLabel htmlFor="email" value="البريد الإلكتروني / Email" className="text-blue-800 font-medium" />
                                 <TextInput
                                     id="email"
                                     type="email"
@@ -69,7 +65,7 @@ export default function Register() {
                             
                             {/* Nom Complet */}
                             <div>
-                                <InputLabel htmlFor="nom_complet" value="Nom Complet" className="text-blue-800 font-medium" />
+                                <InputLabel htmlFor="nom_complet" value="الاسم الكامل / Nom Complet" className="text-blue-800 font-medium" />
                                 <TextInput
                                     id="nom_complet"
                                     name="nom_complet"
@@ -81,18 +77,17 @@ export default function Register() {
                             </div>
                         </div>
 
-                        
-
                         <div className="border-t border-blue-100 my-6 pt-4">
                             <h3 className="text-lg font-medium text-blue-800 mb-3">Informations complémentaires</h3>
                         </div>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            {/* CIN - New field */}
                            
                             
                             {/* Numéro d'Adhésion */}
                             <div>
-                                <InputLabel htmlFor="numero_adhesion" value="Numéro d'Adhésion" className="text-blue-800 font-medium" />
+                                <InputLabel htmlFor="numero_adhesion" value="رقم الانخراط / Numéro d'Adhésion" className="text-blue-800 font-medium" />
                                 <TextInput
                                     id="numero_adhesion"
                                     name="numero_adhesion"
@@ -102,12 +97,23 @@ export default function Register() {
                                 />
                                 <InputError message={errors.numero_adhesion} className="mt-1 text-sm" />
                             </div>
+                             <div>
+                                <InputLabel htmlFor="cin" value="رقم البطاقة الوطنية / CIN" className="text-blue-800 font-medium" />
+                                <TextInput
+                                    id="cin"
+                                    name="cin"
+                                    value={data.cin}
+                                    className="mt-1 block w-full border-blue-300 focus:border-blue-500 focus:ring focus:ring-blue-200"
+                                    onChange={(e) => setData('cin', e.target.value)}
+                                />
+                                <InputError message={errors.cin} className="mt-1 text-sm" />
+                            </div>
                         </div>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             {/* Lieu de Travail */}
                             <div>
-                                <InputLabel htmlFor="lieu_travail" value="Lieu de Travail" className="text-blue-800 font-medium" />
+                                <InputLabel htmlFor="lieu_travail" value="مكان العمل / Lieu de Travail" className="text-blue-800 font-medium" />
                                 <TextInput
                                     id="lieu_travail"
                                     name="lieu_travail"
@@ -120,7 +126,7 @@ export default function Register() {
                             
                             {/* Numéro de Téléphone */}
                             <div>
-                                <InputLabel htmlFor="numero_telephone" value="Numéro de Téléphone" className="text-blue-800 font-medium" />
+                                <InputLabel htmlFor="numero_telephone" value="رقم الهاتف / Numéro de Téléphone" className="text-blue-800 font-medium" />
                                 <TextInput
                                     id="numero_telephone"
                                     name="numero_telephone"
@@ -134,7 +140,7 @@ export default function Register() {
 
                         {/* Vacances */}
                         <div>
-                            <InputLabel htmlFor="vacances_l_annee_dernier" value="Avez-vous bénéficié des vacances l'année dernière ?" className="text-blue-800 font-medium" />
+                            <InputLabel htmlFor="vacances_l_annee_dernier" value="هل استفدت من الإجازة في العام الماضي؟/ Avez-vous bénéficié des vacances l'année dernière ?" className="text-blue-800 font-medium" />
                             <select
                                 id="vacances_l_annee_dernier"
                                 name="vacances_l_annee_dernier"
@@ -142,9 +148,9 @@ export default function Register() {
                                 className="mt-1 block w-full border-blue-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
                                 onChange={(e) => setData('vacances_l_annee_dernier', e.target.value)}
                             >
-                                <option value="">Sélectionnez</option>
-                                <option value="oui">Oui</option>
-                                <option value="non">Non</option>
+                                <option value="">إختار / Sélectionnez</option>
+                                <option value="oui">نعم / Oui</option>
+                                <option value="non">لا / Non</option>
                             </select>
                             <InputError message={errors.vacances_l_annee_dernier} className="mt-1 text-sm" />
                         </div>

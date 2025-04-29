@@ -83,8 +83,11 @@ return [
     |
     */
 
-    'locale' => 'en',
+    // 'locale' => 'en',
 
+    'locale' => 'fr',
+'fallback_locale' => 'fr',
+'available_locales' => ['fr', 'ar'],
     /*
     |--------------------------------------------------------------------------
     | Application Fallback Locale
@@ -96,7 +99,7 @@ return [
     |
     */
 
-    'fallback_locale' => 'en',
+    // 'fallback_locale' => 'en',
 
     /*
     |--------------------------------------------------------------------------
@@ -109,7 +112,7 @@ return [
     |
     */
 
-    'faker_locale' => 'en_US',
+    // 'faker_locale' => 'en_US',
 
     /*
     |--------------------------------------------------------------------------
