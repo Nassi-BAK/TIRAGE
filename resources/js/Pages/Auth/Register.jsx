@@ -140,7 +140,7 @@ export default function Register() {
 
                         {/* Vacances */}
                         <div>
-                            <InputLabel htmlFor="vacances_l_annee_dernier" value="هل استفدت من الإجازة في العام الماضي؟/ Avez-vous bénéficié des vacances l'année dernière ?" className="text-blue-800 font-medium" />
+                            <InputLabel htmlFor="vacances_l_annee_dernier" value="هل استفدت من برنامج الاصطياف العائلي 2024؟/ Avez-vous bénéficié des vacances l'année dernière ?" className="text-blue-800 font-medium" />
                             <select
                                 id="vacances_l_annee_dernier"
                                 name="vacances_l_annee_dernier"

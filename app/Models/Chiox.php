@@ -12,7 +12,8 @@ class Chiox extends Model
         'user_id',
         'destination_id',
         'periode_id',
-        'ordre',  // Si tu veux aussi autoriser 'ordre' à l'assignation de masse
+        'ordre', 
+         // Si tu veux aussi autoriser 'ordre' à l'assignation de masse
     ];
     public function user()
     {

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ChioxController;
 use App\Http\Controllers\ProfileController;
+use App\Models\User;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -32,7 +33,7 @@ Route::get('/dashboard', function () {
     // Vérifier si l'utilisateur est authentifié et a le rôle 'admin'
     if (Auth::check() && Auth::user()->role === 'admin') {
         // Si l'utilisateur est un admin, afficher le tableau de bord
-        return Inertia::render('Dashboard');
+        return Inertia::render('Dashboard',['totalUsers'=>User::all()]);
     }
 
     // Si l'utilisateur n'est pas un admin, le rediriger ailleurs (exemple: home)
@@ -49,6 +50,11 @@ require __DIR__.'/auth.php';
 
 use App\Http\Controllers\DestinationController;
 use App\Http\Controllers\PeriodeController;
+use App\Http\Controllers\StatistiqueController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\UserDataController;
+use App\Models\Setting;
+use Dompdf\Image\Cache;
 
 Route::middleware(['auth'])->group(function () {
 });
@@ -84,3 +90,19 @@ Route::get('/destinations', [DestinationController::class, 'index1']);
 // In your routes/web.php file:
 Route::get('/download-pdf', [ChioxController::class, 'downloadApplicationPdf'])->name('download.pdf');
 
+Route::get('/api/destination-stats', [ChioxController::class, 'getDestinationStats']);
+Route::get('/statistiques', [StatistiqueController::class, 'index'])->name('statistiques.index');
+Route::post('/user_data', [UserDataController::class, 'store'])->name('user_data.store');
+Route::post('/admin/toggle-formulaire', function () {
+    $setting = Setting::first();
+    $setting->formulaire_actif = !$setting->formulaire_actif;
+    $setting->save();
+
+    return back();
+})->name('setting');
+
+// Route::get('/Dashboard', [UserController::class, 'index']);
+
+Route::get('/users', [UserController::class, 'index'])->name('users.index');
+Route::get('/destinations/{destination}/edit', [DestinationController::class, 'edit'])->name('destinations.edit');
+Route::put('/destinations/{destination}', [DestinationController::class, 'update'])->name('destinations.update');

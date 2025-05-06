@@ -6,6 +6,7 @@ use App\Mail\ChoixConfirmationMail;
 use App\Models\Chiox;
 use App\Models\Destination;
 use App\Models\Periode;
+use App\Models\Setting;
 use Barryvdh\DomPDF\Facade\PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -23,6 +24,7 @@ class ChioxController extends Controller
 
         return Inertia::render('StepperForm', [
             'destinations' => $destinations,
+            'formulaireActif'=>Setting::first()->formulaire_actif,
             'periodes' => $periodes,
         ]);
     }
@@ -130,41 +132,61 @@ class ChioxController extends Controller
         ]);
     }
     public function downloadApplicationPdf()
-{
-    $user = auth()->user();
+    {
+        $user = auth()->user();
     
-    // Get user's choices from database
-    $userChoices = Chiox::where('user_id', $user->id)
-                      ->orderBy('ordre')
-                      ->get();
+        $userChoices = Chiox::where('user_id', $user->id)
+                            ->orderBy('ordre')
+                            ->get();
     
-    $destinations = [];
-    $periodes = [];
-    
-    foreach ($userChoices as $choice) {
-        $destination = Destination::find($choice->destination_id);
-        $periode = Periode::find($choice->periode_id);
+        $destinations = [];
+        $periodes = [];
+        foreach ($userChoices as $choice) {
+            $destination = Destination::find($choice->destination_id);
+            $periode = Periode::find($choice->periode_id);
         
-        $destinations[$choice->ordre] = $destination->nom;
-        $periodes[$choice->ordre] = $periode->nom;
+            $destinations[$choice->ordre] = $destination; // ✅ PAS $destination->nom
+            $periodes[$choice->ordre] = $periode; // ✅ PAS $periode->nom
+        }
+        $pdf = app('dompdf.wrapper');
+        $pdf->loadView('pdf.application-form', [
+            'user' => $user,
+            'destinations' => $destinations,
+            'periodes' => $periodes,
+        ]);
+    
+        $pdf->setOptions([
+            'isHtml5ParserEnabled' => true,
+            'isPhpEnabled' => true,
+            'defaultFont' => 'amiri',
+        ]);
+    
+       
+        return $pdf->download('استمارة_الترشيح.pdf');
     }
     
-    // Generate PDF
-    $pdf = app('dompdf.wrapper');
-    $pdf->loadView('pdf.application-form', [
-        'user' => $user,
-        'destinations' => $destinations,
-        'periodes' => $periodes
-    ]);
 
-    // Set appropriate headers for download
-    return response($pdf->output())
-        ->header('Content-Type', 'application/pdf')
-        ->header('Content-Disposition', 'inline; filename="application-form.pdf"')
-        ->header('Cache-Control', 'public, must-revalidate, max-age=0')
-        ->header('Pragma', 'public')
-        ->header('Expires', '0');
+public function getDestinationStats()
+{
+    $stats = DB::table('chiox')
+        ->join('destinations', 'chiox.destination_id', '=', 'destinations.id')
+        ->select('destinations.nom as name', DB::raw('count(*) as value'))
+        ->where('chiox.ordre', 1)
+        ->groupBy('destinations.nom')
+        ->get();
+
+    return response()->json($stats);
 }
 
+public function showForm()
+{
+    $formulaireActif = Setting::first()->formulaire_actif ?? false;
+
+    return Inertia::render('StepperForm', [
+        'destinations' => Destination::all(),
+        'periodes' => Periode::all(),
+        'formulaireActif' => $formulaireActif,
+    ]);
+}
 
 }

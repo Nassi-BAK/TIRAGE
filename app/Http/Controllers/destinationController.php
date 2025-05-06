@@ -1,5 +1,7 @@
 <?php 
 namespace App\Http\Controllers;
+
+use App\Models\Chiox;
 use Illuminate\Support\Facades\Storage;
 
 use Illuminate\Http\Request;
@@ -107,6 +109,27 @@ public function index1()
 
     return Inertia::render('Dashboard', [
         'totalDestinations' => $totalDestinations,
+        'choix' => Chiox::all()  // 
     ]);
 }
+public function edit(Destination $destination)
+{
+    return Inertia::render('EditDestination', [
+        'destination' => $destination,
+    ]);
+}
+public function update(Request $request, Destination $destination)
+{
+    $request->validate([
+        'nom' => 'required|string|max:255',
+        'ville' => 'required|string|max:255',
+        'adresse' => 'required|string|max:255',
+        'description' => 'nullable|string',
+    ]);
+
+    $destination->update($request->only(['nom', 'ville','adresse', 'description']));
+
+    return redirect()->route('destinations.index')->with('success', 'Destination mise à jour avec succès.');
+}
+
 }
