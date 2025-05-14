@@ -61,7 +61,13 @@ export default function EditDestination({ destination, errors: initialErrors }) 
     return (
         <div className="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-md mt-10">
             <h1 className="text-3xl font-bold text-gray-800 mb-6">Modifier la destination</h1>
-            
+            <button
+      type="button"
+      onClick={() => window.history.back()}
+      className="px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-800 rounded"
+    >
+      {t('back')}
+    </button>
             <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
                     <label htmlFor="nom" className="block text-sm font-medium text-gray-700 mb-1">

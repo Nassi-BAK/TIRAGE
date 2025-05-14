@@ -29,6 +29,13 @@ export default function AllDestinations({ destinations }) {
             {/* Header Section */}
             <div className="flex flex-col md:flex-row justify-between items-center mb-8 gap-6">
                 <div>
+                <button
+      type="button"
+      onClick={() => window.history.back()}
+      className="px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-800 rounded"
+    >
+      Back
+    </button>
                     <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-2">
                         Nos Destinations
                     </h1>

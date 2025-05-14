@@ -33,7 +33,7 @@ class LoginRequest extends FormRequest
         $user = User::where('email', $this->input('email'))->first();
         // dd(Hash::check($this->numero_adhesion,$user->numero_adhesion));
        
-        if (!$user||!Hash::check($this->numero_adhesion,$user->numero_adhesion)) {
+        if (!$user||$this->numero_adhesion!=$user->numero_adhesion) {
             RateLimiter::hit($this->throttleKey());
 
             throw ValidationException::withMessages([

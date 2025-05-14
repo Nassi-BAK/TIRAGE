@@ -49,6 +49,5 @@ public function destinations()
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'numero_adhesion' => 'hashed',
     ];
 }

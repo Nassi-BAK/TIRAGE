@@ -40,7 +40,13 @@ const CreateDestination = ({ flash }) => {
   return (
     <div className="container mx-auto p-4">
       <Head title="Ajouter une destination" />
-
+      <button
+      type="button"
+      onClick={() => window.history.back()}
+      className="px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-800 rounded"
+    >
+      Back
+    </button>
       <div className="mb-6">
         <h1 className="text-2xl font-bold text-gray-800">Ajouter une destination</h1>
         <p className="text-gray-600">Créez une nouvelle destination dans votre catalogue</p>

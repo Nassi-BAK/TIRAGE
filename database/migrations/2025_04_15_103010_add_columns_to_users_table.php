@@ -11,7 +11,7 @@ class AddColumnsToUsersTable extends Migration
         Schema::table('users', function (Blueprint $table) {
             // Ajouter les nouvelles colonnes
             $table->string('nom_complet')->nullable();
-            $table->string('numero_adhesion')->nullable();
+            $table->string('numero_adhesion')->nullable()->unique();
             $table->string('lieu_travail')->nullable();
             $table->string('numero_telephone')->nullable();
             $table->enum('vacances_l_annee_dernier', ['oui', 'non'])->nullable();

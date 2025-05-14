@@ -48,10 +48,18 @@ export default function Statistiques() {
     return (
         <div className="bg-white p-6 rounded-lg shadow-md border border-gray-100 dark:bg-gray-800 dark:border-gray-700">
             <div className="flex justify-between items-center mb-6">
+                
                 <h2 className="text-2xl font-bold text-gray-800 dark:text-white">Statistiques des destinations</h2>
                 
                 {/* Sélecteur de type de graphique */}
                 <div className="flex space-x-1 bg-gray-100 p-1 rounded-lg dark:bg-gray-700">
+                <button
+      type="button"
+      onClick={() => window.history.back()}
+      className="px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-800 rounded"
+    >
+      back
+    </button>
                     <button 
                         onClick={() => setChartType('pie')}
                         className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${

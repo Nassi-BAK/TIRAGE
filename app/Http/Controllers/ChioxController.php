@@ -1,13 +1,12 @@
 <?php
-
 namespace App\Http\Controllers;
 
+    use Barryvdh\Snappy\Facades\SnappyPdf as PDF; 
 use App\Mail\ChoixConfirmationMail;
 use App\Models\Chiox;
 use App\Models\Destination;
 use App\Models\Periode;
 use App\Models\Setting;
-use Barryvdh\DomPDF\Facade\PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -131,39 +130,41 @@ class ChioxController extends Controller
             'gagnantChiox' => $choixDuGagnant,
         ]);
     }
-    public function downloadApplicationPdf()
+    
+    public function downloadApplicationPdf(Request $request)
     {
         $user = auth()->user();
     
+        // Récupération des choix de l'utilisateur
         $userChoices = Chiox::where('user_id', $user->id)
                             ->orderBy('ordre')
                             ->get();
     
         $destinations = [];
-        $periodes = [];
+        $periodes     = [];
         foreach ($userChoices as $choice) {
-            $destination = Destination::find($choice->destination_id);
-            $periode = Periode::find($choice->periode_id);
-        
-            $destinations[$choice->ordre] = $destination; // ✅ PAS $destination->nom
-            $periodes[$choice->ordre] = $periode; // ✅ PAS $periode->nom
+            $destinations[$choice->ordre] = Destination::find($choice->destination_id);
+            $periodes    [$choice->ordre] = Periode   ::find($choice->periode_id);
         }
-        $pdf = app('dompdf.wrapper');
-        $pdf->loadView('pdf.application-form', [
-            'user' => $user,
+    
+        // Création du PDF avec Snappy
+        $pdf = PDF::loadView('pdf.application-form', [
+            'user'         => $user,
             'destinations' => $destinations,
-            'periodes' => $periodes,
+            'periodes'     => $periodes,
         ]);
     
-        $pdf->setOptions([
-            'isHtml5ParserEnabled' => true,
-            'isPhpEnabled' => true,
-            'defaultFont' => 'amiri',
-        ]);
+        // Options spécifiques wkhtmltopdf
+        $pdf->setOption('enable-local-file-access', true);
+        $pdf->setOption('encoding', 'utf-8');
+        // Si besoin de définir la police par défaut :
+      
+        // Vous pouvez aussi préciser le binaire ici si vous n'utilisez pas l'env
+        // $pdf->setBinary(env('WKHTMLTOPDF_BINARY'));
     
-       
         return $pdf->download('استمارة_الترشيح.pdf');
     }
+    
     
 
 public function getDestinationStats()
