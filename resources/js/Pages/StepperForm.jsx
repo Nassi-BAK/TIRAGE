@@ -94,14 +94,7 @@ export default function StepperForm({ destinations, periodes, formulaireActif })
     >
       {t('back')}
     </button>
-        <select
-          value={theme}
-          onChange={(e) => setTheme(e.target.value)}
-          className="bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white px-4 py-2 rounded-lg"
-        >
-          <option value="light">{t('theme_light')}</option>
-          <option value="dark">{t('theme_dark')}</option>
-        </select>
+        
       </div>
 
       {/* Notification */}
@@ -113,9 +106,7 @@ export default function StepperForm({ destinations, periodes, formulaireActif })
 
       {/* Header with logout button */}
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold text-gray-800 dark:text-white">
-          {t('planner_title')}
-        </h1>
+      
         
         <button
           onClick={handleLogout}
@@ -161,7 +152,7 @@ export default function StepperForm({ destinations, periodes, formulaireActif })
       {/* Stepper Form Section */}
       <section className={`p-6 rounded-lg shadow-md max-w-xl mx-auto ${stepColors[step].secondary} border ${stepColors[step].border}`}>
         <h2 className={`text-xl font-bold mb-4 ${stepColors[step].text}`}>
-          {t('step')} {step}: {t(`step${step}_label`)}
+           {step}: {t(`step${step}_label`)}
         </h2>
 
         <div className="mb-4">

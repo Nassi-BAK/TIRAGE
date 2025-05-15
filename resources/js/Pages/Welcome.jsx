@@ -343,10 +343,11 @@ export default function Welcome({ auth, destinations, laravelVersion, phpVersion
         >
           {t('view_destinations')}
         </a>
-        <a
-          href="#registration"
-          className="px-8 py-4 bg-white text-blue-600 font-bold rounded-full shadow-lg hover:bg-gray-100"
-        >
+        <a 
+          href={route('register')}
+          className="px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-full shadow-lg"
+          >
+          
           {t('register_draw')}
         </a>
       </div>
@@ -354,31 +355,7 @@ export default function Welcome({ auth, destinations, laravelVersion, phpVersion
   </section>
 
 
-                {/* قسم معلومات البرنامج */}
-                <section className="py-16 bg-white dark:bg-gray-900">
-      <div className="max-w-7xl mx-auto px-4">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-gray-900 dark:text-white">
-            <span className="border-b-4 border-blue-500 pb-2">
-              {t('section_program_title')}
-            </span>
-          </h2>
-        </div>
-
-        <div className="bg-blue-50 dark:bg-gray-800 p-6 rounded-xl shadow-md">
-          <p className="text-lg text-gray-700 dark:text-gray-300 mb-6">
-            {t('section_intro_1')}
-          </p>
-          <p className="text-lg text-gray-700 dark:text-gray-300 mb-6">
-            {t('section_intro_2')}
-          </p>
-          <ul className="list-disc pr-6 mb-6 space-y-2 text-gray-700 dark:text-gray-300">
-            <li>{t('section_item_1')}</li>
-            <li>{t('section_item_2')}</li>
-          </ul>
-        </div>
-      </div>
-    </section>
+               
 
     <section id="destinations" className="py-20 bg-gradient-to-b from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -678,11 +655,9 @@ export default function Welcome({ auth, destinations, laravelVersion, phpVersion
     >
       <div className="max-w-5xl mx-auto px-4 text-white">
         <h2 className="text-3xl font-bold mb-4">
-          {t('registration_cta_title')}
-        </h2>
-        <p className="text-lg text-blue-100 mb-8 max-w-3xl mx-auto">
           {t('registration_cta_desc')}
-        </p>
+        </h2>
+       
         <Link
           href={route('register')}
           className="inline-block bg-white text-blue-700 font-bold py-3 px-8 rounded-lg hover:bg-blue-50 shadow-md"
@@ -712,19 +687,9 @@ export default function Welcome({ auth, destinations, laravelVersion, phpVersion
             <h3 className="text-sm font-bold uppercase tracking-wider mb-4">
               {t('footer_quick_links')}
             </h3>
-            <ul className="space-y-2 text-sm">
+         <ul>
               <li>
-                <a href="#" className="text-gray-400 hover:text-white">
-                  {t('link_about')}
-                </a>
-              </li>
-              <li>
-                <a href="#destinations" className="text-gray-400 hover:text-white">
-                  {t('link_destinations')}
-                </a>
-              </li>
-              <li>
-                <a href="#advantages" className="text-gray-400 hover:text-white">
+                <a href="https://foshalieutis.ma/" className="text-gray-400 hover:text-white">
                   {t('link_advantages')}
                 </a>
               </li>
@@ -738,31 +703,20 @@ export default function Welcome({ auth, destinations, laravelVersion, phpVersion
             </h3>
             <ul className="space-y-2 text-sm">
               <li>
-                <a href="#" className="text-gray-400 hover:text-white">
+                <a href="https://foshalieutis.ma/nous-contacter/" className="text-gray-400 hover:text-white">
                   {t('contact_phone')}
                 </a>
               </li>
-              <li>
-                <a href="#" className="text-gray-400 hover:text-white">
-                  {t('contact_support')}
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-gray-400 hover:text-white">
-                  {t('contact_legal')}
-                </a>
-              </li>
+             
             </ul>
           </div>
         </div>
 
         <div className="border-t border-gray-800 pt-6 flex flex-col md:flex-row justify-between items-center">
           <div className="text-sm text-gray-500">
-            © {year} {t('footer_ministry')}
+            © {year} 
           </div>
-          <div className="text-sm text-gray-500 mt-2 md:mt-0">
-            Laravel v{laravelVersion} (PHP v{phpVersion})
-          </div>
+          
         </div>
       </div>
     </footer>

@@ -1,7 +1,5 @@
 import './bootstrap';
 import '../css/app.css';
-
-// 1. Importez l'initialisation i18n (dans resources/js/i18n.js)
 import './i18n';
 
 import React from 'react';
@@ -19,12 +17,11 @@ createInertiaApp({
   resolve: (name) =>
     resolvePageComponent(
       `./Pages/${name}.jsx`,
-      import.meta.glob('./Pages/**/*.jsx')
+      import.meta.glob('./Pages/**/*.jsx', { eager: true }) // ✅ important
     ),
   setup({ el, App, props }) {
     const root = createRoot(el);
 
-    // 2. Enveloppez votre <App> avec le provider i18n
     root.render(
       <I18nextProvider i18n={i18n}>
         <App {...props} />

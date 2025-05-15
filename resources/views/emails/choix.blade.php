@@ -26,10 +26,15 @@
                             </p>
                             <ul style="padding-left:20px;margin:0 0 1em 0;font-size:14px;line-height:1.6;color:#555555;">
                                 @foreach ($choix as $c)
-                                    <li style="margin-bottom:0.5em;">
-                                        Choix <strong>{{ $c['ordre'] }}</strong> : {{ $c['destination'] }}  
-                                        <span style="color:#888888;">(période : {{ $c['periode'] }})</span>
-                                    </li>
+                                <li style="margin-bottom:0.5em;">
+    Choix <strong>{{ $c['ordre'] }}</strong> : {{ $c['destination'] }}  
+    <span style="color:#888888;">
+        (période : {{ $c['periode'] }} – 
+        du {{ \Carbon\Carbon::parse($c['date_debut'])->format('d/m/Y') }} 
+        au {{ \Carbon\Carbon::parse($c['date_fin'])->format('d/m/Y') }})
+    </span>
+</li>
+
                                 @endforeach
                             </ul>
                             <p style="font-size:14px;line-height:1.6;margin:1.5em 0;">
@@ -37,7 +42,7 @@
                             </p>
                             <p style="font-size:14px;line-height:1.6;margin:0;">
                                 Cordialement,<br>
-                                <em>L’équipe</em>
+                                <em>FOS-halieutis</em>
                             </p>
                         </td>
                     </tr>

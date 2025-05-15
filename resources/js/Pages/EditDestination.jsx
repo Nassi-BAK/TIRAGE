@@ -66,7 +66,7 @@ export default function EditDestination({ destination, errors: initialErrors }) 
       onClick={() => window.history.back()}
       className="px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-800 rounded"
     >
-      {t('back')}
+      Back
     </button>
             <form onSubmit={handleSubmit} className="space-y-6">
                 <div>

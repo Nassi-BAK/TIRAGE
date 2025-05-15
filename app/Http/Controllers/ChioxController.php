@@ -75,10 +75,13 @@ class ChioxController extends Controller
             $periode = Periode::find($choice['periode_id']);
             
             $choixDetails[] = [
-                'ordre' => $ordre,
+                'ordre'       => $ordre,
                 'destination' => $destination->nom,
-                'periode' => $periode->nom,
+                'periode'     => $periode->nom,
+                'date_debut'  => $periode->date_debut,
+                'date_fin'    => $periode->date_fin,
             ];
+            
         }
     
         // Send confirmation email (without PDF)
